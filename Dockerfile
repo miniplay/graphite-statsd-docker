@@ -78,6 +78,10 @@ ADD conf/etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 RUN yum clean all\
  && rm -rf /tmp/* /var/tmp/*
 
+# Generate Graphite init conf
+ADD conf/opt/graphite_config.sh /opt/graphite_config.sh
+RUN sh /opt/graphite_config.sh
+
 # defaults
 #EXPOSE 80 2003-2004 2023-2024 8125/udp
 EXPOSE 80 2003-2004 8125/udp
