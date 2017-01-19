@@ -79,7 +79,8 @@ RUN yum clean all\
  && rm -rf /tmp/* /var/tmp/*
 
 # defaults
-EXPOSE 80 2003-2004 2023-2024 8125/udp
+#EXPOSE 80 2003-2004 2023-2024 8125/udp
+EXPOSE 80 2003-2004 8125/udp
 VOLUME ["/opt/graphite/conf", "/opt/graphite/storage", "/etc/nginx", "/opt/statsd", "/etc/logrotate.d", "/var/log"]
 WORKDIR /
 ENV HOME /root
