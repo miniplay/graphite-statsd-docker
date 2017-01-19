@@ -66,12 +66,9 @@ ADD conf/etc/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /etc/nginx/sites-enabled/
 ADD conf/etc/nginx/sites-enabled/graphite-statsd.conf /etc/nginx/sites-enabled/graphite-statsd.conf
 
-# init django admin
-ADD conf/usr/local/bin/django_admin_init.exp /usr/local/bin/django_admin_init.exp
-RUN /usr/local/bin/django_admin_init.exp
-
 # logging support
 RUN mkdir -p /var/log/carbon /var/log/graphite /var/log/nginx
+#RUN mkdir -p /var/log/supervisord/nginx /var/log/supervisord/graphite /var/log/supervisord/carbon /var/log/supervisord/carbon-aggr /var/log/supervisord/statsd
 ADD conf/etc/logrotate.d/graphite-statsd /etc/logrotate.d/graphite-statsd
 
 # Setup Supervisor
@@ -82,8 +79,8 @@ RUN yum clean all\
  && rm -rf /tmp/* /var/tmp/*
 
 # defaults
-EXPOSE 80 2003-2004 2023-2024 8125/udp 8126
-VOLUME ["/opt/graphite/conf", "/opt/graphite/storage", "/etc/nginx", "/opt/statsd", "/etc/logrotate.d", "/var/log"]
+EXPOSE 80 2003-2004 2023-2024 8125/udp
+#VOLUME ["/opt/graphite/conf", "/opt/graphite/storage", "/etc/nginx", "/opt/statsd", "/etc/logrotate.d", "/var/log"]
 WORKDIR /
 ENV HOME /root
 CMD /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
