@@ -1,3 +1,4 @@
+# Based on hopsoft's graphite-statsd image without Ubuntu and other customizations. 
 FROM centos:7
 MAINTAINER Rafael de Elvira <rafa@minijuegos.com>
 
